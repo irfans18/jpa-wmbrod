@@ -23,6 +23,15 @@ public class MenuPrice {
     public MenuPrice() {
     }
 
+    @Override
+    public String toString() {
+        return "MenuPrice{" +
+                "id=" + id +
+                ", price=" + price +
+                ", menuByMenuId=" + menuByMenuId +
+                '}';
+    }
+
     public MenuPrice(Menu menu, Float price) {
         this.menuByMenuId = menu;
         this.price = price;

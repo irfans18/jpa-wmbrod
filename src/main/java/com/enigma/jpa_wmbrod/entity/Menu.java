@@ -19,6 +19,10 @@ public class Menu {
     @OneToMany(mappedBy = "menuByMenuId")
     private List<MenuPrice> menuPricesById;
 
+    public Menu(Long id, String menuName) {
+        this.id = id;
+        this.menuName = menuName;
+    }
 
     public Menu() {
     }

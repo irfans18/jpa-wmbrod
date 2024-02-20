@@ -20,6 +20,29 @@ public class BillDetail {
     @JoinColumn(name = "menu_price_id", referencedColumnName = "id", nullable = false)
     private MenuPrice menuPriceByMenuPriceId;
 
+    public BillDetail() {
+    }
+
+    public BillDetail(Float qty, Bill billByBillId, MenuPrice menuPriceByMenuPriceId) {
+        this.qty = qty;
+        this.billByBillId = billByBillId;
+        this.menuPriceByMenuPriceId = menuPriceByMenuPriceId;
+    }
+
+    public BillDetail(Float qty, Bill billByBillId) {
+        this.qty = qty;
+        this.billByBillId = billByBillId;
+    }
+
+    @Override
+    public String toString() {
+        return "BillDetail{" +
+                "id=" + id +
+                ", qty=" + qty +
+                ", menuPriceByMenuPriceId=" + menuPriceByMenuPriceId +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

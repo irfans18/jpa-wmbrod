@@ -27,6 +27,18 @@ public class Bill {
     @OneToMany(mappedBy = "billByBillId")
     private Collection<BillDetail> billDetailsById;
 
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", transDate=" + transDate +
+                ", customerByCustomerId=" + customerByCustomerId +
+                ", mTableByTableId=" + mTableByTableId +
+                ", transTypeByTransType=" + transTypeByTransType +
+                ", billDetailsById=" + billDetailsById +
+                '}';
+    }
+
     public Bill() {
     }
 
@@ -76,6 +88,7 @@ public class Bill {
     public void setmTransTypeByTransType(TransType transTypeByTransType) {
         this.transTypeByTransType = transTypeByTransType;
     }
+
 
     public Collection<BillDetail> gettBillDetailsById() {
         return billDetailsById;
