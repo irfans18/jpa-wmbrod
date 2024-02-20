@@ -2,6 +2,7 @@ package com.enigma.jpa_wmbrod.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class Bill {
     private List<BillDetail> billDetails;
 
     public Bill() {
+        this.billDetails = new ArrayList<>();
     }
 
     public Bill(Long id, Date date, Customer customer, TableMenu tableMenu, TransType transType, List<BillDetail> billDetails) {

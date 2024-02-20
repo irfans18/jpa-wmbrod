@@ -35,21 +35,21 @@ public class App {
 */
 //        addColumnPriceWeekend(entityManager);
 
-//        addTransDetail(entityManager, "17-02-2024", List.of(
-//                new BillDetail(new MenuPrice(new Menu("Nasi Putih")), 1F),
-//                new BillDetail(new MenuPrice(new Menu("Nasi Goreng")), 1F),
-//                new BillDetail(new MenuPrice(new Menu("Sayur Sop")), 1F),
-//                new BillDetail(new MenuPrice(new Menu("Es Ovaltine")), 1F)
-//        ), 4, "EI");
-//
-//        addTransDetail(entityManager, "18-02-2024", List.of(
-//                new BillDetail(new MenuPrice(new Menu("Indomie Goreng Telor")), 1F),
-//                new BillDetail(new MenuPrice(new Menu("Telor Balado")), 2F),
-//                new BillDetail(new MenuPrice(new Menu("Kopi Kapal Api")), 1F)
-//        ), 2, "EI");
+        addTransDetail(entityManager, "17-02-2024", List.of(
+                new BillDetail(new MenuPrice(new Menu("Nasi Putih")), 1F),
+                new BillDetail(new MenuPrice(new Menu("Nasi Goreng")), 1F),
+                new BillDetail(new MenuPrice(new Menu("Sayur Sop")), 1F),
+                new BillDetail(new MenuPrice(new Menu("Es Ovaltine")), 1F)
+        ), 4, "EI");
 
-        getId(entityManager, 40);
-        getId(entityManager, 41);
+        addTransDetail(entityManager, "18-02-2024", List.of(
+                new BillDetail(new MenuPrice(new Menu("Indomie Goreng Telor")), 1F),
+                new BillDetail(new MenuPrice(new Menu("Telor Balado")), 2F),
+                new BillDetail(new MenuPrice(new Menu("Kopi Kapal Api")), 1F)
+        ), 2, "EI");
+
+//        getId(entityManager, 99);
+//        getId(entityManager, 100);
 
         entityManager.close();
         JpaUtil.shutdown();
@@ -66,15 +66,13 @@ public class App {
     private static void getId(EntityManager entityManager, Integer id) {
         TransactionDetailRepository transactionDetailRepository = new TransactionDetailResponseImpl(entityManager);
         TransactionDetailResponse byId = transactionDetailRepository.findById(id);
-        System.out.println(byId.getBillId());
-        System.out.println(byId.getBillDetailId());
-        System.out.println(byId.getCustomerName());
-        System.out.println(byId.getDate());
-        System.out.println(byId.getTransType());
+        System.out.println("Bill ID: " + byId.getBillId());
+        System.out.println("Nama: " + byId.getCustomerName());
+        System.out.println("Tanggal Transaksi: " + byId.getDate());
+        System.out.println("Tipe Transaksi: " + byId.getTransType());
         byId.getBillDetails().forEach(
                 billDetail -> {
-                    System.out.println(billDetail.getMenuPrice().getMenu().getName());
-                    System.out.println(billDetail.getQty());
+                    System.out.printf("%-50s | %dx \n", billDetail.getMenuPrice().getMenu().getName(), billDetail.getQty().intValue());
                 }
         );
     }

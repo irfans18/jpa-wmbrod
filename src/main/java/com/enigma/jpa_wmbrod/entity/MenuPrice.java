@@ -23,6 +23,11 @@ public class MenuPrice {
     public MenuPrice() {
     }
 
+    public MenuPrice(Integer id, Menu menu) {
+        this.id = id;
+        this.menu = menu;
+    }
+
     public MenuPrice(Menu menu) {
         this.menu = menu;
     }
@@ -41,6 +46,18 @@ public class MenuPrice {
     public MenuPrice(Integer id, Float price) {
         this.id = id;
         this.price = price;
+    }
+
+    public MenuPrice(List<BillDetail> billDetail) {
+        this.billDetail = billDetail;
+    }
+
+    public MenuPrice(Integer id, Menu menu, Float price, Float priceWeekend, List<BillDetail> billDetail) {
+        this.id = id;
+        this.menu = menu;
+        this.price = price;
+        this.priceWeekend = priceWeekend;
+        this.billDetail = billDetail;
     }
 
     public Integer getId() {
