@@ -4,15 +4,13 @@
              version="2.0">
 
     <persistence-unit name="jpa.wmbrod">
-        <class>com.enigma.jpa_wmbrod.entity.MCustomer</class>
-        <class>com.enigma.jpa_wmbrod.entity.MCustomerDiscount</class>
-        <class>com.enigma.jpa_wmbrod.entity.MDiscount</class>
-        <class>com.enigma.jpa_wmbrod.entity.MMenu</class>
-        <class>com.enigma.jpa_wmbrod.entity.MMenuPrice</class>
-        <class>com.enigma.jpa_wmbrod.entity.MTable</class>
-        <class>com.enigma.jpa_wmbrod.entity.MTransType</class>
-        <class>com.enigma.jpa_wmbrod.entity.TBill</class>
-        <class>com.enigma.jpa_wmbrod.entity.TBillDetail</class>
+        <class>com.enigma.jpa_wmbrod.entity.Customer</class>
+        <class>com.enigma.jpa_wmbrod.entity.Menu</class>
+        <class>com.enigma.jpa_wmbrod.entity.MenuPrice</class>
+        <class>com.enigma.jpa_wmbrod.entity.TableMenu</class>
+        <class>com.enigma.jpa_wmbrod.entity.TransType</class>
+        <class>com.enigma.jpa_wmbrod.entity.Bill</class>
+        <class>com.enigma.jpa_wmbrod.entity.BillDetail</class>
 
         <properties>
             <!-- Database connection settings -->
