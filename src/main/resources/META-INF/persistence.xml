@@ -17,8 +17,8 @@
         <properties>
             <!-- Database connection settings -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/wmbrod" />
-            <property name="jakarta.persistence.jdbc.user" value="usernameKamu" />
-            <property name="jakarta.persistence.jdbc.password" value="passwordKamu" />
+            <property name="jakarta.persistence.jdbc.user" value="postgres" />
+            <property name="jakarta.persistence.jdbc.password" value="root" />
 
             <!-- Echo all executed SQL to console -->
             <property name="hibernate.show_sql" value="true" />
