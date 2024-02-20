@@ -4,6 +4,15 @@
              version="2.0">
 
     <persistence-unit name="jpa.wmbrod">
+        <class>com.enigma.jpa_wmbrod.entity.MCustomer</class>
+        <class>com.enigma.jpa_wmbrod.entity.MCustomerDiscount</class>
+        <class>com.enigma.jpa_wmbrod.entity.MDiscount</class>
+        <class>com.enigma.jpa_wmbrod.entity.MMenu</class>
+        <class>com.enigma.jpa_wmbrod.entity.MMenuPrice</class>
+        <class>com.enigma.jpa_wmbrod.entity.MTable</class>
+        <class>com.enigma.jpa_wmbrod.entity.MTransType</class>
+        <class>com.enigma.jpa_wmbrod.entity.TBill</class>
+        <class>com.enigma.jpa_wmbrod.entity.TBillDetail</class>
 
         <properties>
             <!-- Database connection settings -->
@@ -15,6 +24,22 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.highlight_sql" value="true" />
+            <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/wmbrod"/>
+            <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="toplink.jdbc.user" value="alvindo"/>
+            <property name="toplink.jdbc.password" value="24062000"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/wmbrod"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="alvindo"/>
+            <property name="hibernate.connection.password" value="24062000"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/wmbrod"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="alvindo"/>
+            <property name="openjpa.ConnectionPassword" value="24062000"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/wmbrod"/>
+            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="eclipselink.jdbc.user" value="alvindo"/>
+            <property name="eclipselink.jdbc.password" value="24062000"/>
 
 
         </properties>
