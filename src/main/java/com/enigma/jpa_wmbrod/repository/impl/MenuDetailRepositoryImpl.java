@@ -1,9 +1,9 @@
 package com.enigma.jpa_wmbrod.repository.impl;
 
+import com.enigma.jpa_wmbrod.dto.request.MenuInfoRequest;
 import com.enigma.jpa_wmbrod.entity.Menu;
 import com.enigma.jpa_wmbrod.entity.MenuPrice;
 import com.enigma.jpa_wmbrod.repository.MenuDetailRepository;
-import com.enigma.jpa_wmbrod.request.MenuInfoRequest;
 import jakarta.persistence.EntityManager;
 
 public class MenuDetailRepositoryImpl implements MenuDetailRepository {
