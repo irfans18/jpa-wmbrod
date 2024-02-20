@@ -3,32 +3,20 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="belajar_jpa">
-        <description>
-            Persistence unit for the Jakarta Persistence tutorial of the Hibernate Getting Started Guide
-        </description>
+    <persistence-unit name="agregate.wmbrod">
+
         <properties>
             <!-- Database connection settings -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/wmb_ii" />
-            <property name="jakarta.persistence.jdbc.user" value="postgres" />
-            <property name="jakarta.persistence.jdbc.password" value="root" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/wmbrod" />
+            <property name="jakarta.persistence.jdbc.user" value="usernameKamu" />
+            <property name="jakarta.persistence.jdbc.password" value="passwordKamu" />
 
             <!-- Echo all executed SQL to console -->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.highlight_sql" value="true" />
-            <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/wmb_ii"/>
-            <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="toplink.jdbc.user" value="postgres"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/wmb_ii"/>
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="postgres"/>
-            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/wmb_ii"/>
-            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
-            <property name="openjpa.ConnectionUserName" value="postgres"/>
-            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/wmb_ii"/>
-            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="eclipselink.jdbc.user" value="postgres"/>
+
+
         </properties>
 
 
