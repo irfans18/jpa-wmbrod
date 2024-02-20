@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef860df2-b1b0-4ed7-8160-d5a5ea94c878" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/102cc0bc-58a2-4590-ae5f-82ff16109076.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/102cc0bc-58a2-4590-ae5f-82ff16109076.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/102cc0bc-58a2-4590-ae5f-82ff16109076/storage_v2/_src_/database/wmb_ii.87E-0Q/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/102cc0bc-58a2-4590-ae5f-82ff16109076/storage_v2/_src_/database/wmb_ii.87E-0Q/schema/public.abK9xQ.meta" afterDir="false" />
-    </list>
+    <list default="true" id="ef860df2-b1b0-4ed7-8160-d5a5ea94c878" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708396286482</updated>
-      <workItem from="1708396288592" duration="3433000" />
+      <workItem from="1708396288592" duration="3788000" />
     </task>
     <servers />
   </component>
