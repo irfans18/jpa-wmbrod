@@ -1,13 +1,14 @@
 package com.enigma.jpa_wmbrod.dto.response;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class TransactionDetailPerDateResponse {
-    private LocalDate transDate;
+    private Date transDate;
     private String customerName;
     private Float total;
 
-    public TransactionDetailPerDateResponse(LocalDate transDate, String customerName, Float total) {
+    public TransactionDetailPerDateResponse(Date transDate, String customerName, Float total) {
         this.transDate = transDate;
         this.customerName = customerName;
         this.total = total;
@@ -21,11 +22,11 @@ public class TransactionDetailPerDateResponse {
     public TransactionDetailPerDateResponse() {
     }
 
-    public LocalDate getTransDate() {
+    public Date getTransDate() {
         return transDate;
     }
 
-    public void setTransDate(LocalDate transDate) {
+    public void setTransDate(Date transDate) {
         this.transDate = transDate;
     }
 
