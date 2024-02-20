@@ -30,15 +30,10 @@ public class TransactionDetailResponseImpl implements TransactionDetailRepositor
                 billDetailRequest -> {
                     Menu menu = entityManager.createQuery("FROM Menu WHERE name = :name", Menu.class)
                             .setParameter("name", billDetailRequest.getMenuPrice().getMenu().getName()).getSingleResult();
+                    MenuPrice price = entityManager.find(MenuPrice.class, new MenuPrice(menu.getId().intValue(), menu).getId());
                     BillDetail billDetail = new BillDetail();
                     billDetail.setBillId(bill);
-                    MenuPrice menuPrice = new MenuPrice(menu.getId().intValue(), menu);
-                    MenuPrice price = entityManager.find(MenuPrice.class, menuPrice.getId());
-                    menuPrice.setPrice(price.getPrice());
-                    menuPrice.setPriceWeekend(price.getPriceWeekend());
-                    MenuPrice attach = entityManager.merge(menuPrice);
-                    billDetail.setMenuPrice(attach);
-                    System.out.println(billDetail.getMenuPrice().getId());
+                    billDetail.setMenuPrice(price);
                     billDetail.setQty(billDetailRequest.getQty());
                     bill.getBillDetails().add(billDetail);
                 }
