@@ -8,8 +8,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "m_trans_type", schema = "public", catalog = "wmbrod")
 public class MTransType {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trans_type_id", nullable = false, length = 3)
     private String transTypeId;
     @Basic
@@ -17,6 +17,15 @@ public class MTransType {
     private String description;
     @OneToMany(mappedBy = "mTransTypeByTransType")
     private Collection<TBill> tBillsByTransTypeId;
+
+    public MTransType() {
+    }
+
+    public MTransType(String transTypeId, String description, Collection<TBill> tBillsByTransTypeId) {
+        this.transTypeId = transTypeId;
+        this.description = description;
+        this.tBillsByTransTypeId = tBillsByTransTypeId;
+    }
 
     public String getTransTypeId() {
         return transTypeId;
@@ -32,19 +41,6 @@ public class MTransType {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MTransType that = (MTransType) o;
-        return Objects.equals(transTypeId, that.transTypeId) && Objects.equals(description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(transTypeId, description);
     }
 
     public Collection<TBill> gettBillsByTransTypeId() {

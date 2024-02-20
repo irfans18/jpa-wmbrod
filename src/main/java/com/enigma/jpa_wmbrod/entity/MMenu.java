@@ -6,23 +6,32 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "m_menu", schema = "public", catalog = "wmbrod")
+@Table(name = "m_menu")
 public class MMenu {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_seq")
+    @SequenceGenerator(name = "menu_seq", sequenceName = "m_menu_seq", allocationSize = 1)
+    private Long id;
     @Basic
     @Column(name = "menu_name", nullable = false, length = 100)
     private String menuName;
     @OneToMany(mappedBy = "mMenuByMenuId")
     private Collection<MMenuPrice> mMenuPricesById;
 
-    public long getId() {
+    public MMenu() {
+    }
+
+    public MMenu(Long id, String menuName, Collection<MMenuPrice> mMenuPricesById) {
+        this.id = id;
+        this.menuName = menuName;
+        this.mMenuPricesById = mMenuPricesById;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,19 +41,6 @@ public class MMenu {
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MMenu mMenu = (MMenu) o;
-        return id == mMenu.id && Objects.equals(menuName, mMenu.menuName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, menuName);
     }
 
     public Collection<MMenuPrice> getmMenuPricesById() {

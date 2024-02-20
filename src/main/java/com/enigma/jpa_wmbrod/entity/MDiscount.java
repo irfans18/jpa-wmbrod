@@ -6,12 +6,12 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "m_discount", schema = "public", catalog = "wmbrod")
+@Table(name = "m_discount")
 public class MDiscount {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "m_discount_seq")
+    @SequenceGenerator(name = "m_discount_seq", sequenceName = "m_id_discount_seq", allocationSize = 1)
+    private Integer id;
     @Basic
     @Column(name = "disc_desciption", nullable = true, length = 50)
     private String discDesciption;
@@ -21,11 +21,21 @@ public class MDiscount {
     @OneToMany(mappedBy = "mDiscountByDiscId")
     private Collection<MCustomerDiscount> mCustomerDiscountsById;
 
-    public int getId() {
+    public MDiscount() {
+    }
+
+    public MDiscount(Integer id, String discDesciption, Integer pct, Collection<MCustomerDiscount> mCustomerDiscountsById) {
+        this.id = id;
+        this.discDesciption = discDesciption;
+        this.pct = pct;
+        this.mCustomerDiscountsById = mCustomerDiscountsById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -8,21 +8,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "m_table", schema = "public", catalog = "wmbrod")
 public class MTable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "table_seq")
+    @SequenceGenerator(name = "table_seq", sequenceName = "m_table_seq", allocationSize = 1)
+    private Integer id;
     @Basic
     @Column(name = "table_name", nullable = false, length = 3)
     private String tableName;
     @OneToMany(mappedBy = "mTableByTableId")
     private Collection<TBill> tBillsById;
 
-    public int getId() {
+    public MTable() {
+    }
+
+    public MTable(Integer id, String tableName, Collection<TBill> tBillsById) {
+        this.id = id;
+        this.tableName = tableName;
+        this.tBillsById = tBillsById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,19 +41,6 @@ public class MTable {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MTable mTable = (MTable) o;
-        return id == mTable.id && Objects.equals(tableName, mTable.tableName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, tableName);
     }
 
     public Collection<TBill> gettBillsById() {

@@ -9,22 +9,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_bill", schema = "public", catalog = "wmbrod")
 public class TBill {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
     @Basic
     @Column(name = "trans_date", nullable = false)
     private Date transDate;
-    @Basic
-    @Column(name = "customer_id", nullable = false)
-    private long customerId;
-    @Basic
-    @Column(name = "table_id", nullable = true)
-    private Integer tableId;
-    @Basic
-    @Column(name = "trans_type", nullable = false, length = 3)
-    private String transType;
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private MCustomer mCustomerByCustomerId;
@@ -37,11 +28,23 @@ public class TBill {
     @OneToMany(mappedBy = "tBillByBillId")
     private Collection<TBillDetail> tBillDetailsById;
 
-    public long getId() {
+    public TBill() {
+    }
+
+    public TBill(Long id, Date transDate, MCustomer mCustomerByCustomerId, MTable mTableByTableId, MTransType mTransTypeByTransType, Collection<TBillDetail> tBillDetailsById) {
+        this.id = id;
+        this.transDate = transDate;
+        this.mCustomerByCustomerId = mCustomerByCustomerId;
+        this.mTableByTableId = mTableByTableId;
+        this.mTransTypeByTransType = mTransTypeByTransType;
+        this.tBillDetailsById = tBillDetailsById;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,43 +54,6 @@ public class TBill {
 
     public void setTransDate(Date transDate) {
         this.transDate = transDate;
-    }
-
-    public long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Integer getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(Integer tableId) {
-        this.tableId = tableId;
-    }
-
-    public String getTransType() {
-        return transType;
-    }
-
-    public void setTransType(String transType) {
-        this.transType = transType;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TBill tBill = (TBill) o;
-        return id == tBill.id && customerId == tBill.customerId && Objects.equals(transDate, tBill.transDate) && Objects.equals(tableId, tBill.tableId) && Objects.equals(transType, tBill.transType);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, transDate, customerId, tableId, transType);
     }
 
     public MCustomer getmCustomerByCustomerId() {

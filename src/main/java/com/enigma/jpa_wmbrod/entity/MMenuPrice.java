@@ -6,59 +6,57 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "m_menu_price", schema = "public", catalog = "wmbrod")
+@Table(name = "m_menu_price")
 public class MMenuPrice {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
-    @Basic
-    @Column(name = "menu_id", nullable = false)
-    private long menuId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "menu_price_seq")
+    @SequenceGenerator(name = "menu_price_seq", sequenceName = "m_menu_price_id_seq", allocationSize = 1)
+    private Integer id;
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
-    private float price;
+    private Float price;
+    @Basic
+    @Column(name = "price_weekend")
+    private Float priceWeekend;
     @ManyToOne
     @JoinColumn(name = "menu_id", referencedColumnName = "id", nullable = false)
     private MMenu mMenuByMenuId;
     @OneToMany(mappedBy = "mMenuPriceByMenuPriceId")
     private Collection<TBillDetail> tBillDetailsById;
 
-    public int getId() {
+    public MMenuPrice() {
+    }
+
+    public MMenuPrice(Integer id, Float price, Float priceWeekend, MMenu mMenuByMenuId, Collection<TBillDetail> tBillDetailsById) {
+        this.id = id;
+        this.price = price;
+        this.priceWeekend = priceWeekend;
+        this.mMenuByMenuId = mMenuByMenuId;
+        this.tBillDetailsById = tBillDetailsById;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public long getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(long menuId) {
-        this.menuId = menuId;
-    }
-
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MMenuPrice that = (MMenuPrice) o;
-        return id == that.id && menuId == that.menuId && Float.compare(price, that.price) == 0;
+    public Float getPriceWeekend() {
+        return priceWeekend;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, menuId, price);
+    public void setPriceWeekend(Float priceWeekend) {
+        this.priceWeekend = priceWeekend;
     }
 
     public MMenu getmMenuByMenuId() {

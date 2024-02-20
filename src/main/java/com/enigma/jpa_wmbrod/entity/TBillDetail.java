@@ -7,19 +7,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_bill_detail", schema = "public", catalog = "wmbrod")
 public class TBillDetail {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private long id;
-    @Basic
-    @Column(name = "bill_id", nullable = false)
-    private long billId;
-    @Basic
-    @Column(name = "menu_price_id", nullable = false)
-    private int menuPriceId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bill_detail_seq")
+    @SequenceGenerator(name = "bill_detail_seq", sequenceName = "t_bill_detail_seq", allocationSize = 1)
+    private Long id;
     @Basic
     @Column(name = "qty", nullable = false, precision = 0)
-    private float qty;
+    private Float qty;
     @ManyToOne
     @JoinColumn(name = "bill_id", referencedColumnName = "id", nullable = false)
     private TBill tBillByBillId;
@@ -27,49 +21,30 @@ public class TBillDetail {
     @JoinColumn(name = "menu_price_id", referencedColumnName = "id", nullable = false)
     private MMenuPrice mMenuPriceByMenuPriceId;
 
-    public long getId() {
+    public TBillDetail() {
+    }
+
+    public TBillDetail(Long id, Float qty, TBill tBillByBillId, MMenuPrice mMenuPriceByMenuPriceId) {
+        this.id = id;
+        this.qty = qty;
+        this.tBillByBillId = tBillByBillId;
+        this.mMenuPriceByMenuPriceId = mMenuPriceByMenuPriceId;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getBillId() {
-        return billId;
-    }
-
-    public void setBillId(long billId) {
-        this.billId = billId;
-    }
-
-    public int getMenuPriceId() {
-        return menuPriceId;
-    }
-
-    public void setMenuPriceId(int menuPriceId) {
-        this.menuPriceId = menuPriceId;
-    }
-
-    public float getQty() {
+    public Float getQty() {
         return qty;
     }
 
-    public void setQty(float qty) {
+    public void setQty(Float qty) {
         this.qty = qty;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TBillDetail that = (TBillDetail) o;
-        return id == that.id && billId == that.billId && menuPriceId == that.menuPriceId && Float.compare(qty, that.qty) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, billId, menuPriceId, qty);
     }
 
     public TBill gettBillByBillId() {
