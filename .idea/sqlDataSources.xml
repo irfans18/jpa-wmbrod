@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="737cb9f9-69d6-49b4-a112-7caf6138db47" name="wmb_ii@localhost Mapping">
+      <data-sources db="102cc0bc-58a2-4590-ae5f-82ff16109076" ddl="7b80f004-a779-41e6-bf35-78db0a3fc062" />
+      <scope>
+        <node kind="database" qname="wmb_ii" />
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="7b80f004-a779-41e6-bf35-78db0a3fc062" />
+          <option name="name" value="wmb_ii@localhost (DDL)" />
+          <option name="dbmsName" value="POSTGRES" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
