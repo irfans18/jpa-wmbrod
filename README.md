@@ -1,4 +1,7 @@
 ## Challenge Kelompok 1 [Warung Makan Brodi]
+
+[db_wmbrod](https://github.com/irfans18/jpa-wmbrod/blob/master/src/main/resources/wmbrod.sql)
+
 Warung Makan Brodi
 WMB adalah sebuah startup yang bergerak di bidang makanan. Aplikasi WMB sedang didevelop. Sebagai seorang Technical Leader anda diminta untuk membuat struktur database yang efisien.
 Dibawah ini adalah data WMB yang belum ternormalisasi. Buatlah data dibawah ini menjadi table-table yang sudah ternormalisasi sesuai dengan materi yang telah di ajarkan Trainer sebelumnya.
