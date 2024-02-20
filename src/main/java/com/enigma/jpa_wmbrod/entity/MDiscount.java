@@ -10,22 +10,20 @@ import java.util.Objects;
 public class MDiscount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
-    @Basic
-    @Column(name = "disc_desciption", nullable = true, length = 50)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "disc_desciption")
     private String discDesciption;
-    @Basic
-    @Column(name = "pct", nullable = true)
+    @Column(name = "pct")
     private Integer pct;
     @OneToMany(mappedBy = "mDiscountByDiscId")
     private Collection<MCustomerDiscount> mCustomerDiscountsById;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,7 +48,7 @@ public class MDiscount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MDiscount mDiscount = (MDiscount) o;
-        return id == mDiscount.id && Objects.equals(discDesciption, mDiscount.discDesciption) && Objects.equals(pct, mDiscount.pct);
+        return Objects.equals(id, mDiscount.id) && Objects.equals(discDesciption, mDiscount.discDesciption) && Objects.equals(pct, mDiscount.pct);
     }
 
     @Override

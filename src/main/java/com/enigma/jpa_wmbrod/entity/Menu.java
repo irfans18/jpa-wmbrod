@@ -3,26 +3,35 @@ package com.enigma.jpa_wmbrod.entity;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "m_menu", schema = "public", catalog = "wmbrod")
-public class MMenu {
+public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private long id;
+    @Column(name = "id")
+    private Long id;
     @Basic
-    @Column(name = "menu_name", nullable = false, length = 100)
+    @Column(name = "menu_name")
     private String menuName;
-    @OneToMany(mappedBy = "mMenuByMenuId")
-    private Collection<MMenuPrice> mMenuPricesById;
+    @OneToMany(mappedBy = "menuByMenuId")
+    private List<MenuPrice> menuPricesById;
 
-    public long getId() {
+
+    public Menu() {
+    }
+
+    public Menu(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,8 +47,8 @@ public class MMenu {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MMenu mMenu = (MMenu) o;
-        return id == mMenu.id && Objects.equals(menuName, mMenu.menuName);
+        Menu menu = (Menu) o;
+        return Objects.equals(id, menu.id) && Objects.equals(menuName, menu.menuName);
     }
 
     @Override
@@ -47,11 +56,11 @@ public class MMenu {
         return Objects.hash(id, menuName);
     }
 
-    public Collection<MMenuPrice> getmMenuPricesById() {
-        return mMenuPricesById;
+    public List<MenuPrice> getmMenuPricesById() {
+        return menuPricesById;
     }
 
-    public void setmMenuPricesById(Collection<MMenuPrice> mMenuPricesById) {
-        this.mMenuPricesById = mMenuPricesById;
+    public void setmMenuPricesById(List<MenuPrice> menuPricesById) {
+        this.menuPricesById = menuPricesById;
     }
 }

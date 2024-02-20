@@ -7,16 +7,15 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "m_trans_type", schema = "public", catalog = "wmbrod")
-public class MTransType {
+public class TransType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "trans_type_id", nullable = false, length = 3)
+    @Column(name = "trans_type_id")
     private String transTypeId;
-    @Basic
-    @Column(name = "description", nullable = true, length = 50)
+    @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "mTransTypeByTransType")
-    private Collection<TBill> tBillsByTransTypeId;
+    @OneToMany(mappedBy = "transTypeByTransType")
+    private Collection<Bill> billsByTransTypeId;
 
     public String getTransTypeId() {
         return transTypeId;
@@ -38,7 +37,7 @@ public class MTransType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MTransType that = (MTransType) o;
+        TransType that = (TransType) o;
         return Objects.equals(transTypeId, that.transTypeId) && Objects.equals(description, that.description);
     }
 
@@ -47,11 +46,11 @@ public class MTransType {
         return Objects.hash(transTypeId, description);
     }
 
-    public Collection<TBill> gettBillsByTransTypeId() {
-        return tBillsByTransTypeId;
+    public Collection<Bill> gettBillsByTransTypeId() {
+        return billsByTransTypeId;
     }
 
-    public void settBillsByTransTypeId(Collection<TBill> tBillsByTransTypeId) {
-        this.tBillsByTransTypeId = tBillsByTransTypeId;
+    public void settBillsByTransTypeId(Collection<Bill> billsByTransTypeId) {
+        this.billsByTransTypeId = billsByTransTypeId;
     }
 }
