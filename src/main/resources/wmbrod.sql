@@ -250,3 +250,9 @@ ALTER TABLE "public"."t_bill" ADD FOREIGN KEY ("table_id") REFERENCES "public"."
 ALTER TABLE "public"."t_bill" ADD FOREIGN KEY ("customer_id") REFERENCES "public"."m_customer"("id");
 ALTER TABLE "public"."t_bill_detail" ADD FOREIGN KEY ("bill_id") REFERENCES "public"."t_bill"("id");
 ALTER TABLE "public"."t_bill_detail" ADD FOREIGN KEY ("menu_price_id") REFERENCES "public"."m_menu_price"("id");
+
+CREATE SEQUENCE t_bill_id_seq START WITH 13;
+ALTER TABLE t_bill ALTER COLUMN id SET DEFAULT nextval('t_bill_id_seq');
+
+CREATE SEQUENCE t_bill_detail_id_seq START WITH 36;
+ALTER TABLE t_bill_detail ALTER COLUMN id SET DEFAULT nextval('t_bill_detail_id_seq');
