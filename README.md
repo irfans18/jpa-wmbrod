@@ -6,9 +6,9 @@ Warung Makan Brodi
 WMB adalah sebuah startup yang bergerak di bidang makanan. Aplikasi WMB sedang didevelop. Sebagai seorang Technical Leader anda diminta untuk membuat struktur database yang efisien.
 Dibawah ini adalah data WMB yang belum ternormalisasi. Buatlah data dibawah ini menjadi table-table yang sudah ternormalisasi sesuai dengan materi yang telah di ajarkan Trainer sebelumnya.
 ## Bikin Project baru untuk menyelesaikan tugas. bisa memanfaatkan persistence.xml dan entity yang tersedia
-1. Total transaksi di wmb
+1. Total omset di wmb
 2. Customer paling royal per trans date
-3. Total transaksi di wmb pas weekend
+3. Total omset di wmb pas weekend (pakai hari biasa)
 
 -----   
 Seiring berkembangnya zaman dan meninjau dari 3 task sebelumnya maka WMB bermaksud untuk melakukan ekspansi dan menaikan harga khusus untuk weekend. 
