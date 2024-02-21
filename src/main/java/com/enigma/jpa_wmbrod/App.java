@@ -39,7 +39,11 @@ public class App {
 //        solved.getId(entityManager, 118);
 //        solved.getId(entityManager, 119);
 
-        solved.getTotalOmset(entityManager);
+//        solved.getTotalOmsetOnWeekend(entityManager);
+
+//        solved.getTotalOmset(entityManager);
+
+        solved.getRoyalCustomer(entityManager);
 
         entityManager.close();
         JpaUtil.shutdown();

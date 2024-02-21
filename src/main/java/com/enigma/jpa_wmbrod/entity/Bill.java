@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "t_bill")
@@ -86,5 +87,18 @@ public class Bill {
 
     public void setBillDetails(List<BillDetail> billDetails) {
         this.billDetails = billDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+        return Objects.equals(id, bill.id) && Objects.equals(date, bill.date) && Objects.equals(customer, bill.customer) && Objects.equals(tableMenu, bill.tableMenu) && Objects.equals(transType, bill.transType) && Objects.equals(billDetails, bill.billDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, date, customer, tableMenu, transType, billDetails);
     }
 }

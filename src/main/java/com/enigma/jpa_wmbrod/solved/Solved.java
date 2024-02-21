@@ -2,6 +2,8 @@ package com.enigma.jpa_wmbrod.solved;
 
 import com.enigma.jpa_wmbrod.dto.request.TransactionDetailRequest;
 import com.enigma.jpa_wmbrod.dto.response.GetOmsetWeekend;
+import com.enigma.jpa_wmbrod.dto.response.GetTotalOmset;
+import com.enigma.jpa_wmbrod.dto.response.RoyalCustomer;
 import com.enigma.jpa_wmbrod.dto.response.TransactionDetailResponse;
 import com.enigma.jpa_wmbrod.entity.Bill;
 import com.enigma.jpa_wmbrod.entity.BillDetail;
@@ -22,10 +24,24 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Solved {
-    // 1.
+    // 1. Total Omset di WMBROD
+    public void getTotalOmset(EntityManager entityManager) {
+        TransactionDetailRepository transactionDetailRepository = new TransactionDetailResponseImpl(entityManager);
+        GetTotalOmset totalOmset = transactionDetailRepository.getTotalOmset();
+        System.out.println("Total Omset di wmbrod: " + totalOmset.getTotal());
+    }
 
 
-    // 2.
+    // 2. Customer paling royal per transdate
+    public void getRoyalCustomer(EntityManager entityManager) {
+        TransactionDetailRepository transactionDetailRepository = new TransactionDetailResponseImpl(entityManager);
+        List<RoyalCustomer> royalCustomer = transactionDetailRepository.getRoyalCustomer();
+        royalCustomer.forEach(
+                customer -> {
+                    System.out.printf("%-10s | %-10s | %s \n", customer.getDate(), customer.getName(), customer.getTotalTransactionBuy());
+                }
+        );
+    }
 
 
     // 3.
@@ -67,7 +83,7 @@ public class Solved {
     }
 
     // 5.
-    public void getTotalOmset(EntityManager entityManager) {
+    public void getTotalOmsetOnWeekend(EntityManager entityManager) {
         TransactionDetailRepository transactionDetailRepository = new TransactionDetailResponseImpl(entityManager);
         GetOmsetWeekend omsetOnWeekend = transactionDetailRepository.getOmsetOnWeekend();
         if (omsetOnWeekend != null) {

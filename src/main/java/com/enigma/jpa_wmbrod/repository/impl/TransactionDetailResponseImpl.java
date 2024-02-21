@@ -2,12 +2,16 @@ package com.enigma.jpa_wmbrod.repository.impl;
 
 import com.enigma.jpa_wmbrod.dto.request.TransactionDetailRequest;
 import com.enigma.jpa_wmbrod.dto.response.GetOmsetWeekend;
+import com.enigma.jpa_wmbrod.dto.response.GetTotalOmset;
+import com.enigma.jpa_wmbrod.dto.response.RoyalCustomer;
 import com.enigma.jpa_wmbrod.dto.response.TransactionDetailResponse;
 import com.enigma.jpa_wmbrod.entity.*;
 import com.enigma.jpa_wmbrod.repository.TransactionDetailRepository;
 import jakarta.persistence.EntityManager;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TransactionDetailResponseImpl implements TransactionDetailRepository {
     private final EntityManager entityManager;
@@ -84,14 +88,40 @@ public class TransactionDetailResponseImpl implements TransactionDetailRepositor
                 .flatMap(omset -> omset.getBillDetails().stream())
                 .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
                 .reduce(0F, Float::sum);
-//        Float omset;
-//        resultListOnSunday.stream().map(
-//            omset -> {
-//                omset.getBillDetails().stream().map(
-//                        billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty()
-//                ).reduce(0F, Float::sum);
-//            }
-//        )
-//        return omset;
+    }
+
+    @Override
+    public GetTotalOmset getTotalOmset() {
+        List<Bill> bills = entityManager.createQuery("FROM Bill", Bill.class).getResultList();
+        GetTotalOmset totalOmset = new GetTotalOmset();
+        totalOmset.setTotal(bills.stream()
+                .flatMap(bill -> bill.getBillDetails().stream())
+                .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
+                .reduce(0F, Float::sum));
+        return totalOmset;
+    }
+
+    @Override
+    public List<RoyalCustomer> getRoyalCustomer() {
+        List<Bill> bills = entityManager.createQuery("FROM Bill", Bill.class).getResultList();
+        List<RoyalCustomer> customersWithTotalOmset = bills.stream()
+                .map(bill -> {
+                    RoyalCustomer royalCustomer = new RoyalCustomer();
+                    royalCustomer.setDate(bill.getDate());
+                    royalCustomer.setName(bill.getCustomer().getName());
+                    royalCustomer.setBillDetailList(bill.getBillDetails());
+                    Float reduce = bill.getBillDetails().stream()
+                            .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
+                            .reduce(0F, Float::sum);
+                    royalCustomer.setTotalTransactionBuy(reduce);
+                    return royalCustomer;
+                }).toList();
+        Map<Date, List<RoyalCustomer>> customersGroupByDate = customersWithTotalOmset.stream()
+                .collect(Collectors.groupingBy(RoyalCustomer::getDate));
+        Map<Date, RoyalCustomer> royalCustomerMap = customersGroupByDate.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream()
+                        .max(Comparator.comparing(RoyalCustomer::getTotalTransactionBuy)).orElse(null)
+                ));
+        return royalCustomerMap.values().stream().toList();
     }
 }
