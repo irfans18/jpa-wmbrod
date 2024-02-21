@@ -13,7 +13,7 @@ public interface TransactionDetailRepository {
     void save(TransactionDetailRequest transactionDetailRequest);
     TransactionDetailResponse findById(Integer id);
     List<Bill> getAllBill();
-    GetOmsetWeekend getOmsetOnWeekend();
+    GetOmsetWeekend getOmsetOnWeekend(boolean isNormalPrice);
     GetTotalOmset getTotalOmset();
     List<RoyalCustomer> getRoyalCustomer();
 }

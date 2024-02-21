@@ -68,7 +68,7 @@ public class TransactionDetailResponseImpl implements TransactionDetailRepositor
     }
 
     @Override
-    public GetOmsetWeekend getOmsetOnWeekend() {
+    public GetOmsetWeekend getOmsetOnWeekend(boolean isNormalPrice) {
         String query = "SELECT * FROM t_bill WHERE EXTRACT(ISODOW FROM trans_date ) IN (";
         List<Bill> resultListOnSturday = entityManager
                 .createNativeQuery(new StringBuilder().append(query).append("6)").toString(), Bill.class)
@@ -78,16 +78,23 @@ public class TransactionDetailResponseImpl implements TransactionDetailRepositor
                 .getResultList();
 
         GetOmsetWeekend omsetWeekend = new GetOmsetWeekend();
-        omsetWeekend.setTotalTransactionSaturday(getTransactionDetailWeekend(resultListOnSturday));
-        omsetWeekend.setTotalTransactionSunday(getTransactionDetailWeekend(resultListOnSunday));
+        omsetWeekend.setTotalTransactionSaturday(getTransactionDetailWeekend(resultListOnSturday, isNormalPrice));
+        omsetWeekend.setTotalTransactionSunday(getTransactionDetailWeekend(resultListOnSunday, isNormalPrice));
         return omsetWeekend;
     }
 
-    private Float getTransactionDetailWeekend(List<Bill> resulstOnWeekend) {
-        return resulstOnWeekend.stream()
-                .flatMap(omset -> omset.getBillDetails().stream())
-                .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
-                .reduce(0F, Float::sum);
+    private Float getTransactionDetailWeekend(List<Bill> resulstOnWeekend, boolean isNormalPrice) {
+        if (isNormalPrice) {
+            return resulstOnWeekend.stream()
+                    .flatMap(omset -> omset.getBillDetails().stream())
+                    .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
+                    .reduce(0F, Float::sum);
+        } else {
+            return resulstOnWeekend.stream()
+                    .flatMap(omset -> omset.getBillDetails().stream())
+                    .map(billDetail -> billDetail.getMenuPrice().getPriceWeekend() * billDetail.getQty())
+                    .reduce(0F, Float::sum);
+        }
     }
 
     @Override

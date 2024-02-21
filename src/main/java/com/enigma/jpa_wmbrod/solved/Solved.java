@@ -44,7 +44,11 @@ public class Solved {
     }
 
 
-    // 3.
+    // 3. Total omset di wmb pas weekend (pakai hari biasa)
+    public void getNormalPriceWeekend(EntityManager entityManager) {
+        getTotalOmsetOnWeekend(entityManager, true);
+    }
+
     public void addColumnPriceWeekend(EntityManager entityManager) {
         AddColumnPriceWeekend addColumnPriceWeekend = new AddColumnPriceRepositoryImpl(entityManager);
         //        get menu price list
@@ -54,16 +58,17 @@ public class Solved {
     }
 
     // 4.
-//    Masukkan data transaksi berikut :
-//    Nama: Budi Tanggal Transaksi: 17 February 2024 Meja: 4 Jenis Transaksi: Makan Ditempat Menu yang dipesan:
-//    Nasi Putih 1x
-//    Nasi Goreng 1x
-//    Sayur Sop 1x
-//    Es Ovaltine 1x
-//    Nama: Budi Tanggal Transaksi: 18 February 2024 Meja: 2 Jenis Transaksi: Makan Ditempat Menu yang dipesan:
-//    Indomie Goreng Telor 1x
-//    Telor Balado 2x
-//    Kopi Kapal Api 1x
+    //    Masukkan data transaksi berikut :
+    //    Nama: Budi Tanggal Transaksi: 17 February 2024 Meja: 4 Jenis Transaksi: Makan Ditempat Menu yang dipesan:
+    //    Nasi Putih 1x
+    //    Nasi Goreng 1x
+    //    Sayur Sop 1x
+    //    Es Ovaltine 1x
+    //    Nama: Budi Tanggal Transaksi: 18 February 2024 Meja: 2 Jenis Transaksi: Makan Ditempat Menu yang dipesan:
+    //    Indomie Goreng Telor 1x
+    //    Telor Balado 2x
+    //    Kopi Kapal Api 1x
+
     public void addTransDetail(EntityManager entityManager, String dateBuy, List<BillDetail> billDetails, String name, Integer tableId, String transType) {
         Date date;
         try {
@@ -83,9 +88,9 @@ public class Solved {
     }
 
     // 5.
-    public void getTotalOmsetOnWeekend(EntityManager entityManager) {
+    public void getTotalOmsetOnWeekend(EntityManager entityManager, Boolean isNormalPrice) {
         TransactionDetailRepository transactionDetailRepository = new TransactionDetailResponseImpl(entityManager);
-        GetOmsetWeekend omsetOnWeekend = transactionDetailRepository.getOmsetOnWeekend();
+        GetOmsetWeekend omsetOnWeekend = transactionDetailRepository.getOmsetOnWeekend(isNormalPrice);
         if (omsetOnWeekend != null) {
             System.out.println("Total Transaksi Hari Sabtu: " + omsetOnWeekend.getTotalTransactionSaturday());
             System.out.println("Total Transaksi Hari Minggu: " + omsetOnWeekend.getTotalTransactionSunday());

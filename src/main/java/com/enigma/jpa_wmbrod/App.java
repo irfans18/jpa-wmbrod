@@ -39,11 +39,15 @@ public class App {
 //        solved.getId(entityManager, 118);
 //        solved.getId(entityManager, 119);
 
-//        solved.getTotalOmsetOnWeekend(entityManager);
+//        weekend price
+//        solved.getTotalOmsetOnWeekend(entityManager, false);
 
 //        solved.getTotalOmset(entityManager);
 
-        solved.getRoyalCustomer(entityManager);
+//        solved.getRoyalCustomer(entityManager);
+
+//        normal price on weekend
+//        solved.getTotalOmsetOnWeekend(entityManager, true);
 
         entityManager.close();
         JpaUtil.shutdown();
