@@ -1,6 +1,7 @@
 package com.enigma.jpa_wmbrod.repository.impl;
 
 import com.enigma.jpa_wmbrod.dto.request.TransactionDetailRequest;
+import com.enigma.jpa_wmbrod.dto.response.GetOmsetWeekend;
 import com.enigma.jpa_wmbrod.dto.response.TransactionDetailResponse;
 import com.enigma.jpa_wmbrod.entity.*;
 import com.enigma.jpa_wmbrod.repository.TransactionDetailRepository;
@@ -58,7 +59,39 @@ public class TransactionDetailResponseImpl implements TransactionDetailRepositor
     }
 
     @Override
-    public TransactionDetailResponse getAll() {
-        return null;
+    public List<Bill> getAllBill() {
+        return entityManager.createQuery("FROM Bill", Bill.class).getResultList();
+    }
+
+    @Override
+    public GetOmsetWeekend getOmsetOnWeekend() {
+        String query = "SELECT * FROM t_bill WHERE EXTRACT(ISODOW FROM trans_date ) IN (";
+        List<Bill> resultListOnSturday = entityManager
+                .createNativeQuery(new StringBuilder().append(query).append("6)").toString(), Bill.class)
+                .getResultList();
+        List<Bill> resultListOnSunday = entityManager
+                .createNativeQuery(new StringBuilder().append(query).append("7)").toString(), Bill.class)
+                .getResultList();
+
+        GetOmsetWeekend omsetWeekend = new GetOmsetWeekend();
+        omsetWeekend.setTotalTransactionSaturday(getTransactionDetailWeekend(resultListOnSturday));
+        omsetWeekend.setTotalTransactionSunday(getTransactionDetailWeekend(resultListOnSunday));
+        return omsetWeekend;
+    }
+
+    private Float getTransactionDetailWeekend(List<Bill> resulstOnWeekend) {
+        return resulstOnWeekend.stream()
+                .flatMap(omset -> omset.getBillDetails().stream())
+                .map(billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty())
+                .reduce(0F, Float::sum);
+//        Float omset;
+//        resultListOnSunday.stream().map(
+//            omset -> {
+//                omset.getBillDetails().stream().map(
+//                        billDetail -> billDetail.getMenuPrice().getPrice() * billDetail.getQty()
+//                ).reduce(0F, Float::sum);
+//            }
+//        )
+//        return omset;
     }
 }
